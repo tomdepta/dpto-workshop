@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using DPTO.Domain;
 
-namespace DPTO.Infrastructure.Repositories
+namespace DPTO.ApplicationService.UseCases
 {
     public interface ICarRepository
     {

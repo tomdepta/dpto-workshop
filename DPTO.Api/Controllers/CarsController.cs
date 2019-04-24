@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DPTO.ApplicationService.UseCases;
 using DPTO.Domain;
 using DPTO.Dto;
 using DPTO.Infrastructure;
@@ -14,46 +15,33 @@ namespace DPTO.Api.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private readonly ICarRepository _repository;
+        private readonly CreateCarUseCase _createCar;
+        private readonly GetCarsUseCase _getCars;
+        private readonly GetCarByIdUseCase _getCarById;
 
-        public CarsController(ICarRepository repository)
+        public CarsController(CreateCarUseCase createCar, GetCarsUseCase getCars, GetCarByIdUseCase getCarById)
         {
-            _repository = repository;
+            _createCar = createCar;
+            _getCars = getCars;
+            _getCarById = getCarById;
         }
 
         [HttpGet]
         public List<CarDto> Get()
         {
-            return _repository.GetCars()
-                .Select(car => new CarDto
-                {
-                    Name = car.Name,
-                    AddedOn = car.AddedOn
-                })
-                .ToList();
+            return _getCars.Handle();
         }
         
         [HttpGet("{id}")]
         public CarDto Get(int id)
         {
-            var car = _repository.GetCarById(id);
-            return new CarDto
-            {
-                Name = car.Name,
-                AddedOn = car.AddedOn
-            };
+            return _getCarById.Handle(id);
         }
         
         [HttpPost]
         public void Post([FromBody] CarParams car)
         {
-            var newCar = new Car
-            {
-                Name = car.Name,
-                AddedOn = DateTime.Now
-            };
-
-            _repository.Add(newCar);
+            _createCar.Handle(car);
         }
     }
 }

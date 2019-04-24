@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DPTO.ApplicationService.UseCases;
 using DPTO.Infrastructure;
 using DPTO.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -33,6 +34,9 @@ namespace DPTO.Api
 
             services.AddDbContext<DptoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<ICarRepository, CarRepository>();
+            services.AddTransient<GetCarsUseCase>();
+            services.AddTransient<CreateCarUseCase>();
+            services.AddTransient<GetCarByIdUseCase>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DPTO.ApplicationService.UseCases;
 using DPTO.Domain;
 
 namespace DPTO.Infrastructure.Repositories

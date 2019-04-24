@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DPTO.ApplicationService\DPTO.ApplicationService.csproj" />
     <ProjectReference Include="..\DPTO.Domain\DPTO.Domain.csproj" />
   </ItemGroup>
 

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DPTO.ApplicationService\DPTO.ApplicationService.csproj" />
     <ProjectReference Include="..\DPTO.Domain\DPTO.Domain.csproj" />
     <ProjectReference Include="..\DPTO.Dto\DPTO.Dto.csproj" />
     <ProjectReference Include="..\DPTO.Infrastructure\DPTO.Infrastructure.csproj" />
