@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DPTO.Domain\DPTO.Domain.csproj" />
+    <ProjectReference Include="..\DPTO.Infrastructure\DPTO.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
