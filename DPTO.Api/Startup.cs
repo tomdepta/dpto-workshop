@@ -50,6 +50,8 @@ namespace DPTO.Api
                 app.UseHsts();
             }
 
+            app.UseCors(b => b.WithOrigins("https://localhost:5002").AllowAnyHeader().AllowAnyMethod());
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
