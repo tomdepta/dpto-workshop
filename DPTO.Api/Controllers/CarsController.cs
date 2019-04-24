@@ -28,13 +28,13 @@ namespace DPTO.Api.Controllers
         [HttpGet]
         public List<Car> Get()
         {
-            return _cars;
+            return _context.Cars.ToList();
         }
         
         [HttpGet("{id}")]
         public Car Get(int id)
         {
-            return _cars.FirstOrDefault(car => car.Id == id);
+            return _context.Cars.FirstOrDefault(car => car.Id == id);
         }
         
         [HttpPost]
