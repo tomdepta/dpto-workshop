@@ -9,4 +9,10 @@
     <ProjectReference Include="..\DPTO.Dto\DPTO.Dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\..\..\Users\tdepta\.nuget\packages\automapper\8.0.0\lib\netstandard2.0\AutoMapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

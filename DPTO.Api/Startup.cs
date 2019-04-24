@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DPTO.ApplicationService.UseCases;
+using DPTO.Domain;
+using DPTO.Dto;
 using DPTO.Infrastructure;
 using DPTO.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +35,16 @@ namespace DPTO.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            var mapperConfig = new MapperConfiguration(c =>
+            {
+                c.CreateMap<CarParams, Car>().ForMember(d => d.AddedOn, opts => opts.Ignore());
+                c.CreateMap<Car, CarDto>();
+            });
+
+            var mapper = mapperConfig.CreateMapper();
+
             services.AddDbContext<DptoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton(mapper);
             services.AddTransient<ICarRepository, CarRepository>();
             services.AddTransient<GetCarsUseCase>();
             services.AddTransient<CreateCarUseCase>();
