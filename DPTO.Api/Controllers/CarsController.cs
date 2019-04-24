@@ -13,9 +13,9 @@ namespace DPTO.Api.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private readonly CarRepository _repository;
+        private readonly ICarRepository _repository;
 
-        public CarsController(CarRepository repository)
+        public CarsController(ICarRepository repository)
         {
             _repository = repository;
         }

@@ -4,7 +4,7 @@ using DPTO.Domain;
 
 namespace DPTO.Infrastructure.Repositories
 {
-    public class CarRepository
+    public class CarRepository : ICarRepository
     {
         private readonly DptoContext _context;
 
