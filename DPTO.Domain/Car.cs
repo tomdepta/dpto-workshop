@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DPTO.Api.Controllers
+namespace DPTO.Domain
 {
     public class Car
     {
