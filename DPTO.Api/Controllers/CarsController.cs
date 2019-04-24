@@ -15,9 +15,9 @@ namespace DPTO.Api.Controllers
     {
         private readonly CarRepository _repository;
 
-        public CarsController(DptoContext context)
+        public CarsController(CarRepository repository)
         {
-            _repository = new CarRepository(context);
+            _repository = repository;
         }
 
         [HttpGet]
