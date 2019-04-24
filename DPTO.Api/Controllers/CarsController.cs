@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DPTO.Domain;
 using DPTO.Infrastructure;
+using DPTO.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPTO.Api.Controllers
@@ -12,36 +13,29 @@ namespace DPTO.Api.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private readonly List<Car> _cars = new List<Car>
-        {
-            new Car {Id = 1, Name = "Opel", AddedOn = DateTime.Now},
-            new Car {Id = 2, Name = "Renault", AddedOn = DateTime.Now}
-        };
-
-        private readonly DptoContext _context;
+        private readonly CarRepository _repository;
 
         public CarsController(DptoContext context)
         {
-            _context = context;
+            _repository = new CarRepository(context);
         }
 
         [HttpGet]
         public List<Car> Get()
         {
-            return _context.Cars.ToList();
+            return _repository.GetCars();
         }
         
         [HttpGet("{id}")]
         public Car Get(int id)
         {
-            return _context.Cars.FirstOrDefault(car => car.Id == id);
+            return _repository.GetCarById(id);
         }
         
         [HttpPost]
         public void Post([FromBody] Car car)
         {
-            _context.Cars.Add(car);
-            _context.SaveChanges();
+            _repository.Add(car);
         }
     }
 }
