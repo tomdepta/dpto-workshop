@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DPTO.Domain;
+using DPTO.Dto;
 using DPTO.Infrastructure;
 using DPTO.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -21,21 +22,38 @@ namespace DPTO.Api.Controllers
         }
 
         [HttpGet]
-        public List<Car> Get()
+        public List<CarDto> Get()
         {
-            return _repository.GetCars();
+            return _repository.GetCars()
+                .Select(car => new CarDto
+                {
+                    Name = car.Name,
+                    AddedOn = car.AddedOn
+                })
+                .ToList();
         }
         
         [HttpGet("{id}")]
-        public Car Get(int id)
+        public CarDto Get(int id)
         {
-            return _repository.GetCarById(id);
+            var car = _repository.GetCarById(id);
+            return new CarDto
+            {
+                Name = car.Name,
+                AddedOn = car.AddedOn
+            };
         }
         
         [HttpPost]
-        public void Post([FromBody] Car car)
+        public void Post([FromBody] CarParams car)
         {
-            _repository.Add(car);
+            var newCar = new Car
+            {
+                Name = car.Name,
+                AddedOn = DateTime.Now
+            };
+
+            _repository.Add(newCar);
         }
     }
 }
