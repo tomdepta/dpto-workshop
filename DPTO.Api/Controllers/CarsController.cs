@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DPTO.Domain;
+using DPTO.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPTO.Api.Controllers
@@ -17,6 +18,13 @@ namespace DPTO.Api.Controllers
             new Car {Id = 2, Name = "Renault", AddedOn = DateTime.Now}
         };
 
+        private readonly DptoContext _context;
+
+        public CarsController(DptoContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public List<Car> Get()
         {
@@ -30,8 +38,10 @@ namespace DPTO.Api.Controllers
         }
         
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Car car)
         {
+            _context.Cars.Add(car);
+            _context.SaveChanges();
         }
     }
 }
