@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   url = "https://localhost:5001/api/";
 
   cars = [];
+  displayedColumns = ["name", "addedOn"];
 
   carName = "";
 
@@ -26,6 +27,8 @@ export class AppComponent implements OnInit {
   }
 
   addCar() {
-    this.http.post(this.url + "cars", { Name: this.carName }).subscribe(() => { this.fetchCars(); this.carName = ""; });
+    if (!!this.carName) {
+      this.http.post(this.url + "cars", { Name: this.carName }).subscribe(() => { this.fetchCars(); this.carName = ""; });
+    }
   }
 }
