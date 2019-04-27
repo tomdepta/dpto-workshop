@@ -1,0 +1,10 @@
+<div style="text-align:center">
+  <h1>
+    Your awesome car list!
+  </h1>
+  <div *ngFor="let car of cars">
+    {{car.name}}
+  </div>
+  <input [(ngModel)]="carName">
+  <button (click)="addCar()">Add</button>
+</div>
